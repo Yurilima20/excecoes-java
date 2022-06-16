@@ -27,23 +27,21 @@ public class Programa {
 			 Reserva reserva = new Reserva(numero, saida, entrada);
 			 System.out.println("Reservas : " + reserva);
 			 
-			 System.out.println();
-			 System.out.println("Entre com as novas datas para atualizar a reserva ");
-			 System.out.println("Data de entrada (dd/MM/yyyy)");
-			 entrada = sdf.parse(sc.next());
-			 System.out.println("Data de saída (dd/MM/yyyy)");
-			 saida = sdf.parse(sc.next());
-			 
-			 Date agora = new Date();
-			 if(saida.before(agora) || entrada.before(agora)) {
-				 System.out.println("Não pode atualizar a data para uma data que não seja a partir da data presente");
-			 } else if (!saida.after(entrada)) {
-				 System.out.println("Erro a data de entrada não pode ser maior que a data de saída");
-			 } else {
-				 reserva.atualizaData(saida, entrada);
-				 System.out.println("Reservas : " + reserva);
-			 }	 
-			 
+				System.out.println();
+				System.out.println("Entre com as novas datas para atualizar a reserva ");
+				System.out.println("Data de entrada (dd/MM/yyyy)");
+				entrada = sdf.parse(sc.next());
+				System.out.println("Data de saída (dd/MM/yyyy)");
+				saida = sdf.parse(sc.next());
+
+				String error = reserva.atualizaData(saida, entrada);
+				if (error != null) {
+					System.out.println("Erro na reserva " + error);
+				} else {
+					System.out.println("Reservas : " + reserva);
+				}
+				
+
 		 }
 		 
 		sc.close(); 

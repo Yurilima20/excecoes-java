@@ -40,9 +40,16 @@ public class Reserva {
 	   return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
    }
   
-   public void atualizaData(Date saida, Date entrada) {
+   public String atualizaData(Date saida, Date entrada) {
+	   Date agora = new Date();
+		 if(saida.before(agora) || entrada.before(agora)) {
+			 return "Não pode atualizar a data para uma data que não seja a partir da data presente";
+		 } else if (!saida.after(entrada)) {
+			 return "Erro a data de entrada não pode ser maior que a data de saída";
+		 }
 	   this.saida = saida; 
 	   this.entrada = entrada;
+	   return null; 
    }
    
    @Override
